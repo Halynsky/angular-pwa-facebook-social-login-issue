@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 declare let FB: any;
 
 @Component({
