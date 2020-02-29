@@ -18,24 +18,25 @@ export class AppComponent  {
       return_scopes: true,
       enable_profile_selector: true
     };
+    let _this = this;
     FB.login((response: any) => {
       alert(JSON.stringify(response));
       if (response.authResponse) {
         let authResponse = response.authResponse;
         FB.api(`/me?fields=name,email,last_name,first_name,picture`, (fbUser: any) => {
-          this.user = {};
+          _this.user = {};
 
-          this.user.id = fbUser.id;
-          this.user.name = fbUser.name;
-          this.user.email = fbUser.email;
-          this.user.photoUrl = 'https://graph.facebook.com/' + fbUser.id + '/picture?type=normal';
-          this.user.firstName = fbUser.first_name;
-          this.user.lastName = fbUser.last_name;
-          this.user.authToken = authResponse.accessToken;
+          _this.user.id = fbUser.id;
+          _this.user.name = fbUser.name;
+          _this.user.email = fbUser.email;
+          _this.user.photoUrl = 'https://graph.facebook.com/' + fbUser.id + '/picture?type=normal';
+          _this.user.firstName = fbUser.first_name;
+          _this.user.lastName = fbUser.last_name;
+          _this.user.authToken = authResponse.accessToken;
 
-          this.user.facebook = fbUser;
+          _this.user.facebook = fbUser;
 
-          alert(JSON.stringify(this.user));
+          alert(JSON.stringify(_this.user));
         });
       } else {
         // error
