@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
@@ -11,6 +11,10 @@ declare let FB: any;
 })
 export class AppComponent  {
   user: any = null;
+
+  constructor(public changeDetectorRef: ChangeDetectorRef) {
+
+  }
 
  authFacebookNative(){
     let fbLoginOptions = {
@@ -35,6 +39,8 @@ export class AppComponent  {
           _this.user.authToken = authResponse.accessToken;
 
           _this.user.facebook = fbUser;
+
+          _this.changeDetectorRef.detectChanges();
 
           alert(JSON.stringify(_this.user));
         });
